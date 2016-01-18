@@ -26,7 +26,7 @@ import fr.keyconsulting.formation.model.User;
 @WebServlet("/Users")
 public class UserListServlet extends HttpServlet {
 
-	Logger logger = LoggerFactory.getLogger(UserListServlet.class);
+	private static Logger logger = LoggerFactory.getLogger(UserListServlet.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class UserListServlet extends HttpServlet {
 		try {
 			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			logger.error("Error while loading jdbc driver",e);
 		}
 	}
 
@@ -48,8 +48,6 @@ public class UserListServlet extends HttpServlet {
 	 */
 	public UserListServlet() {
 		super();
-
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
