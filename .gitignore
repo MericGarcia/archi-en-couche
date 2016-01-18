@@ -3,3 +3,6 @@
 .DS_Store
 .project
 .classpath
+target
+build
+Servers
