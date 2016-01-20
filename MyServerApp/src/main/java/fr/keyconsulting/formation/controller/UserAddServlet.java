@@ -23,10 +23,10 @@ import fr.keyconsulting.formation.model.User;
 /**
  * Servlet implementation class UserListServlet
  */
-@WebServlet("/Users")
-public class UserListServlet extends HttpServlet {
+@WebServlet("/UserAdd")
+public class UserAddServlet extends HttpServlet {
 
-	private static Logger logger = LoggerFactory.getLogger(UserListServlet.class);
+	private static Logger logger = LoggerFactory.getLogger(UserAddServlet.class);
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class UserListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserListServlet() {
+	public UserAddServlet() {
 		super();
 	}
 
@@ -56,8 +56,7 @@ public class UserListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("users", selectAllQuery());
-		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("Users");
 		view.forward(request, response);
 	}
 
@@ -67,30 +66,31 @@ public class UserListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		if (firstname != null && lastname != null) {
+			request.setAttribute("firstname", firstname);
+			request.setAttribute("lastname", lastname);
+			insertQuery(new User(firstname, lastname));
+		}
 		doGet(request, response);
 	}
 
-	// fonction recuperant un user
-	private List<User> selectAllQuery() {
 
-		List<User> users = new ArrayList<>();
+	// fonction enregistrant un user
+	void insertQuery(User user) {
+
 		Statement stmt = null;
-		String query = "SELECT * FROM test.USER";
+		String query = "INSERT INTO test.USER (firstname,lastname) VALUES('" + user.firstname + "','" + user.lastname
+				+ "')";
 
 		try {
 			stmt = DriverManager.getConnection(URL, USER, PASSWORD).createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-
-			while (rs.next()) {
-				String firstname = rs.getString("firstname");
-				String lastname = rs.getString("lastname");
-				users.add(new User(firstname, lastname));
-			}
+			stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			logger.error("Problem while retrieving users list", e);
+			logger.error("Problem while inserting user into database", e);
 		}
 
-		return users;
 	}
 
 }

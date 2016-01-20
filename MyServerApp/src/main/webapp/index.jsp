@@ -19,7 +19,7 @@
 		${cur.firstname} - ${cur.lastname} <br>
 	</c:forEach>
 	<br>
-	<form name="register" action="Users" method="post">
+	<form name="register" action="UserAdd" method="post">
 		<input name="firstname"> <input name="lastname">
 		<button type="submit">Enregistrer</button>
 	</form>
