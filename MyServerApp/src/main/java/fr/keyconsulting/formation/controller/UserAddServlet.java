@@ -56,8 +56,7 @@ public class UserAddServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("Users");
-		view.forward(request, response);
+		response.sendRedirect("Users");
 	}
 
 	/**
