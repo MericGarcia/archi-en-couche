@@ -1,12 +1,9 @@
 package fr.keyconsulting.formation.view;
 
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,23 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.keyconsulting.formation.controller.UserListController;
+import fr.keyconsulting.formation.model.ObservableUserList;
 import fr.keyconsulting.formation.model.User;
 
 /**
  * Servlet implementation class UserListServlet
  */
 @WebServlet("/Users")
-public class UserListServlet extends HttpServlet {
+public class UserListServlet extends HttpServlet implements Observer {
 
 	private static final long serialVersionUID = 1L;
-
-	private static Logger logger = LoggerFactory.getLogger(UserListServlet.class);
 	
-	UserListController controller = new UserListController();
+	UserListController controller = UserListController.get();
 	List<User> users;
 
 	/**
@@ -39,6 +32,7 @@ public class UserListServlet extends HttpServlet {
 	 */
 	public UserListServlet() {
 		super();
+		controller.addUserListObserver(this);
 		users = controller.getAllUsers();
 	}
 
@@ -60,6 +54,11 @@ public class UserListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		users = ((ObservableUserList) o).get();		
 	}
 
 }
