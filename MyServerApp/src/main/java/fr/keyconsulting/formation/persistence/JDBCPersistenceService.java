@@ -1,4 +1,4 @@
-package fr.keyconsulting.formation.service;
+package fr.keyconsulting.formation.persistence;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import fr.keyconsulting.formation.model.User;
 
-public class UserPersistenceService {
-	
-	private static Logger logger = LoggerFactory.getLogger(UserPersistenceService.class);
+public class JDBCPersistenceService {
+
+	private static Logger logger = LoggerFactory.getLogger(JDBCPersistenceService.class);
 
 	static String PASSWORD = "test";
 	static String USER = "test";
@@ -28,17 +28,9 @@ public class UserPersistenceService {
 			logger.error("Error while loading jdbc driver", e);
 		}
 	}
-	
-	public void add(User user){
-		insertQuery(user);
-	}
-	
-	public List<User> getAllUser(){
-		return selectAllQuery();
-	}
-	
+
 	// fonction recuperant un user
-	private List<User> selectAllQuery() {
+	public List<User> selectAllUsers() {
 
 		List<User> users = new ArrayList<>();
 		Statement stmt = null;
@@ -61,7 +53,7 @@ public class UserPersistenceService {
 	}
 
 	// fonction enregistrant un user
-	void insertQuery(User user) {
+	public void insertUser(User user) {
 
 		Statement stmt = null;
 		String query = "INSERT INTO test.USER (firstname,lastname) VALUES('" + user.firstname + "','" + user.lastname

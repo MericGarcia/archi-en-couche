@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import fr.keyconsulting.formation.model.ObservableUserList;
 import fr.keyconsulting.formation.model.User;
-import fr.keyconsulting.formation.service.UserPersistenceService;
+import fr.keyconsulting.formation.service.UserService;
 
 public class UserListController {
 
@@ -14,12 +14,12 @@ public class UserListController {
 	
 	private ObservableUserList userList;
 	
-	private UserPersistenceService userService;
+	private UserService userService;
 	
 
 	private UserListController() {
-		this.userService =  new UserPersistenceService();
-		this.userList =  new ObservableUserList(userService.getAllUser());
+		this.userService =  new UserService();
+		this.userList =  new ObservableUserList(userService.getAllUsers());
 		instance = this;
 	}
 
