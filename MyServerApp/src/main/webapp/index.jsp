@@ -23,5 +23,8 @@
 		<input name="firstname"> <input name="lastname">
 		<button type="submit">Enregistrer</button>
 	</form>
+	<form name="delete" action="DeleteUsers" method="post">
+		<button type="submit">Delete All Users</button>
+	</form>
 </body>
 </html>

@@ -67,5 +67,19 @@ public class JDBCPersistenceService {
 		}
 
 	}
+	
+	public void deleteAllUsers() {
+
+		Statement stmt = null;
+		String query = "DELETE FROM test.USER";
+
+		try {
+			stmt = DriverManager.getConnection(URL, USER, PASSWORD).createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			logger.error("Problem while trying to delete all users", e);
+		}
+
+	}
 
 }

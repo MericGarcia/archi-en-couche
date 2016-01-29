@@ -17,6 +17,10 @@ public class UserService {
 		persistenceService.insertUser(user);
 	}
 	
+	public void deleteAllUsers(){
+		persistenceService.deleteAllUsers();
+	}
+	
 	public List<User> getAllUsers(){
 		return persistenceService.selectAllUsers();
 	}

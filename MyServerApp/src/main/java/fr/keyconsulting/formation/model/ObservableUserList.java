@@ -18,4 +18,12 @@ public class ObservableUserList extends Observable{
 		return users;
 	}
 	
+	public void clear(){
+		users.clear();
+	}
+	
+	public void add(User user){
+		users.add(user);
+	}
+	
 }

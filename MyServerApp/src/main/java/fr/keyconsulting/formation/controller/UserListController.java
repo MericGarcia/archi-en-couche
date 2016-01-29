@@ -34,10 +34,18 @@ public class UserListController {
 		return userList.get();
 	}
 	
+	public void deleteAllUsers() {
+		userService.deleteAllUsers();
+		synchronized(userList){
+			userList.clear();
+			userList.notifyAll();
+		}
+	}
+	
 	public void add(User user) {
 		userService.add(user);
 		synchronized(userList){
-			userList.get().add(user);
+			userList.add(user);
 			userList.notifyAll();
 		}
 	}
