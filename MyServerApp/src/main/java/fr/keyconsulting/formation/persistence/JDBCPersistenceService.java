@@ -9,10 +9,12 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import fr.keyconsulting.formation.model.User;
 
-public class JDBCPersistenceService {
+@Service
+public class JDBCPersistenceService implements PersistenceService {
 
 	private static Logger logger = LoggerFactory.getLogger(JDBCPersistenceService.class);
 
@@ -30,6 +32,10 @@ public class JDBCPersistenceService {
 	}
 
 	// fonction recuperant un user
+	/* (non-Javadoc)
+	 * @see fr.keyconsulting.formation.persistence.PersistenceService#selectAllUsers()
+	 */
+	@Override
 	public List<User> selectAllUsers() {
 
 		List<User> users = new ArrayList<>();
@@ -53,6 +59,10 @@ public class JDBCPersistenceService {
 	}
 
 	// fonction enregistrant un user
+	/* (non-Javadoc)
+	 * @see fr.keyconsulting.formation.persistence.PersistenceService#insertUser(fr.keyconsulting.formation.model.User)
+	 */
+	@Override
 	public void insertUser(User user) {
 
 		Statement stmt = null;
@@ -68,6 +78,10 @@ public class JDBCPersistenceService {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see fr.keyconsulting.formation.persistence.PersistenceService#deleteAllUsers()
+	 */
+	@Override
 	public void deleteAllUsers() {
 
 		Statement stmt = null;

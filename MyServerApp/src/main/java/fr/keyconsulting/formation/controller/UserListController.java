@@ -3,6 +3,9 @@ package fr.keyconsulting.formation.controller;
 import java.util.List;
 import java.util.Observer;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import fr.keyconsulting.formation.model.ObservableUserList;
 import fr.keyconsulting.formation.model.User;
 import fr.keyconsulting.formation.service.UserService;
@@ -18,7 +21,8 @@ public class UserListController {
 	
 
 	private UserListController() {
-		this.userService =  new UserService();
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		this.userService =  context.getBean(UserService.class);
 		this.userList =  new ObservableUserList(userService.getAllUsers());
 		instance = this;
 	}

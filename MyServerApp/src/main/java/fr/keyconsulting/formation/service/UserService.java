@@ -2,16 +2,17 @@ package fr.keyconsulting.formation.service;
 
 import java.util.List;
 
-import fr.keyconsulting.formation.model.User;
-import fr.keyconsulting.formation.persistence.JDBCPersistenceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import fr.keyconsulting.formation.model.User;
+import fr.keyconsulting.formation.persistence.PersistenceService;
+
+@Service
 public class UserService {
 	
-	private JDBCPersistenceService persistenceService;
-	
-	public UserService(){
-		this.persistenceService = new JDBCPersistenceService();
-	}
+	@Autowired
+	private PersistenceService persistenceService;
 	
 	public void add(User user){
 		persistenceService.insertUser(user);
