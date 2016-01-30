@@ -1,5 +1,7 @@
 package fr.keyconsulting.formation.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @Entity
 @Table(name="MyUser")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User {
+public class User implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	public String firstname;
 	public String lastname;

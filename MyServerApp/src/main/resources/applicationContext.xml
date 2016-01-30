@@ -11,5 +11,8 @@
 	<context:component-scan base-package="fr.keyconsulting.formation.persistence" />
 
 	<context:annotation-config />
+	
+	<import resource="classpath:applicationContextJMS.xml"/>
+	<import resource="classpath:applicationContextWS.xml"/>
 
 </beans>
