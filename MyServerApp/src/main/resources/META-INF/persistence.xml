@@ -5,16 +5,17 @@
 	<persistence-unit name="model">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- Annotated entity classes -->
-        <class>fr.keyconsulting.formation.model.User</class>
+		<class>fr.keyconsulting.formation.model.User</class>
 		<properties>
- 
-			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/myDB" />
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-			<property name="hibernate.connection.username" value="test" />
-			<property name="hibernate.connection.password" value="test" />
-			
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:derby:/Users/mericgarcia/Workspace/Repositories/formation/architecture-couche/simpleDb;create=true" />
+			<!-- <property name="javax.persistence.jdbc.user" value="admin" /> -->
+			<!-- <property name="javax.persistence.jdbc.password" value="admin" /> -->
+			<property name="hibernate.default_schema" value="APP" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.generateDdl" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
